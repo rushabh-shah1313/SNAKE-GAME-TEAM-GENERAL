@@ -179,17 +179,17 @@ void SnakeGame::draw() {
     }
     setColor(3);
     cout << "Score: " << score << "\n";
-    cout << "Use WASD to move. Press X to exit.\n";
+    cout << "Use WASD to Move. Press X to Restart.\n";
 }
 
  void SnakeGame::restartGame() {
-    snake.reset(width / 2, height / 2);  // Reset snake to center
-    score = 0;  // Reset score
-    gameOver = false;  // Reset game over flag
+    snake.reset(width / 2, height / 2);  
+    score = 0;  
+    gameOver = false;  
     spawnFood();
     spawnPoison();
-    system("cls");  // Clear screen
-    draw();  // Redraw game
+    system("cls");  
+    draw();  
 }
 
 
