@@ -3,6 +3,8 @@
 
 Snake::Snake(int startX, int startY) {
     body.push_back({startX, startY});
+    body.push_back({startX-1,startY});
+    body.push_back({startX-2,startY});
     dx = 1;
     dy = 0;
 }
