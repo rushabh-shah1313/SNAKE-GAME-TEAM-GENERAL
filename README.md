@@ -19,13 +19,13 @@ A simple console-based Snake game implemented in C++ using Windows API for graph
 ## How to Run
 1. **Compile the Code**
    ```sh
-   g++ snake_game.cpp -o snake_game -lwinmm
+   g++ -o Snakegame Snake_main.cpp game_mechanics.cpp -lwinmm
    ```
    *(Ensure MinGW is installed if using Windows.)*
 
 2. **Run the Executable**
    ```sh
-   snake_game.exe
+   Snakegame.exe
    ```
 
 ## Dependencies
