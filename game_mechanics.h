@@ -26,6 +26,8 @@ public:
     bool collidesWith(int x, int y);
     pair<int, int> getHead();
     vector<pair<int, int>> getBody();
+
+
 };
 
 // SnakeGame Class
@@ -36,6 +38,7 @@ private:
     int poisonX, poisonY;
     int score;
     bool gameOver;
+    int highscore;
     Snake snake;
 
 public:
@@ -53,6 +56,11 @@ public:
     void restartGame();
     bool isGameOver();
     int getScore();
+
+
+    void updateHighScore(); 
+    void HighScore(int highscore);
+    void displayHighScore();
 };
 
 

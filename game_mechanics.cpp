@@ -3,7 +3,7 @@
 
 Snake::Snake(int startX, int startY) {
     body.push_back({startX, startY});
-    body.push_back({startX-1,startY});
+      body.push_back({startX-1,startY});
     body.push_back({startX-2,startY});
     dx = 1;
     dy = 0;
@@ -38,7 +38,10 @@ void Snake::shrink(){
 
 void Snake::reset(int startX, int startY) {
     body.clear();
-    body.push_back({startX, startY});
+     body.push_back({startX, startY});
+      body.push_back({startX-1,startY});
+    body.push_back({startX-2,startY});
+    
     dx = 1;
     dy = 0;
 }
@@ -56,12 +59,13 @@ bool Snake::collidesWith(int x, int y) {
 
 pair<int, int> Snake::getHead() { return body.front(); }
 
-SnakeGame::SnakeGame(int w, int h) : width(w), height(h), snake(w / 2, h / 2) {
+SnakeGame::SnakeGame(int w, int h) : width(w), height(h), snake(w / 2, h / 2), highscore(0) {
     gameOver = false;
     score = 0;
     srand(time(0));
     spawnFood();
     spawnPoison();
+    
 }
 
 void SnakeGame::spawnFood() {
@@ -79,6 +83,7 @@ void SnakeGame ::spawnPoison() {
 
 }
 
+
 void SnakeGame::playBGM() {
     PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
 }
@@ -87,7 +92,20 @@ void SnakeGame::playOver() {
     PlaySound(TEXT("over.wav"), NULL, SND_ASYNC | SND_LOOP);
 }
 
+void SnakeGame::updateHighScore() {
+    if (score > highscore) {
+        highscore = score;
+    }
+}
+void SnakeGame::HighScore(int value){
+    if(value>highscore){
+        highscore = value;
+    }
+}
 
+void SnakeGame::displayHighScore() {
+    cout << "High Score: " << highscore << "\n";
+}
 
 
 int SnakeGame::getScore() { return score; }
@@ -128,10 +146,13 @@ void SnakeGame::update() {
         snake.shrink();
           if (snake.getBody().empty()) {
         gameOver = true;
-    }
+        }
         score -= 1;
         spawnPoison();
     }
+    
+
+    updateHighScore();
 }
 
 void SnakeGame::clearScreen() {
@@ -169,7 +190,10 @@ void SnakeGame::draw() {
  
                if(segment.first == j && segment.second == i) {
                         setColor(2);
-                        cout << "O";
+                        if(snake.getHead().first == j && snake.getHead().second == i){
+                            cout << "X";
+                        }
+                        else cout << "O";
                         printed = true;
                         break;
                     }
@@ -181,7 +205,8 @@ void SnakeGame::draw() {
     }
     setColor(3);
     cout << "Score: " << score << "\n";
-    cout << "Use WASD to Move. Press X to Restart.\n";
+    displayHighScore();
+    cout << "Use WASD to move. Press X to exit.\n";
 }
 
  void SnakeGame::restartGame() {
