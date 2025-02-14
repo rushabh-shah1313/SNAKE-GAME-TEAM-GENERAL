@@ -4,7 +4,7 @@
 #include <windows.h> 
 #include <cstdlib>   
 #include <ctime>
-#include "Header.h"
+#include "game_mechanics.h"
 #include <mmsystem.h>  // For sound
 #pragma comment(lib, "winmm.lib")  // Link sound library
 using namespace std;
