@@ -4,7 +4,7 @@
 #include <windows.h> 
 #include <cstdlib>   
 #include <ctime>
-#include "game_mechanics.h"
+#include "Header.h"
 #include <mmsystem.h>  // For sound
 #pragma comment(lib, "winmm.lib")  // Link sound library
 using namespace std;
@@ -12,18 +12,31 @@ using namespace std;
 
 
 int main() {
-    int x;
+    int x=1;
     char c = 'A';
     int highscore = -4;
     do{
         
+       do{ 
         cout << "Choose difficulty:-" << endl 
             << "1. Easy" << endl 
             << "2. Medium" << endl 
             << "3. Hard" << endl;
-
-        cin >> x;
         
+            cin >> x;
+            if(x == 1 || x == 2 || x==3 ){
+                break;
+            }
+
+            else{
+                cout << "Enter a valid number!"<<endl;
+            }
+       }while(x!=1 || x != 2 || x!=3 ); 
+
+            
+            
+          
+
         SnakeGame game(40, 20);
         game.HighScore(highscore);
 
@@ -31,7 +44,8 @@ int main() {
         _getch();
 
         game.playBGM(); // Start background music
-
+       
+        
         int speed = (x == 1) ? 100 : (x == 2) ? 20 : (x == 3) ? 10 : 0; // Adjust speed for difficulty
         
         system("cls");
@@ -77,4 +91,5 @@ int main() {
         
     }while(c == 'x');
     return 0;
+
 }
